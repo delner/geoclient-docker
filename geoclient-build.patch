@@ -1,25 +1,25 @@
 diff --git a/build.gradle b/build.gradle
-index 4558579..3648217 100644
+index 6285bf3..3ff03b2 100644
 --- a/build.gradle
 +++ b/build.gradle
-@@ -22,7 +22,9 @@ allprojects {
+@@ -20,7 +20,9 @@ allprojects {
    version = rootProject.version
  
    repositories {
 +    maven { url "http://maven.geotoolkit.org/" }
      jcenter()
 +    mavenLocal()
+     mavenCentral()
    }
- 
-   apply from: "${gradleScriptDir}/dependencies.gradle"
+
 diff --git a/geoclient-native/build.gradle b/geoclient-native/build.gradle
-index 52db3a7..ba4cf97 100644
+index a53dde0..757a8ae 100644
 --- a/geoclient-native/build.gradle
 +++ b/geoclient-native/build.gradle
-@@ -65,7 +65,7 @@ model {
-         if (targetPlatform.operatingSystem.windows) {
-           linker.args "-L${gsLibraryPath}", "-Wl,--add-stdcall-alias", "-lm", "-lNYCgeo", "-lgeo", "-ledequiv", "-lapequiv", "-lsan", "-lsnd", "-lstExcpt", "-lStdLast", "-lStdUniv", "-lstEnder", "-lstretch", "-lthined"
-         } else {
+@@ -64,7 +64,7 @@ model {
+           cCompiler.define "DLL_IMPORT"
+           linker.args "-L${gsLibraryPath}", "-lm", "-lNYCgeo", "-lgeo", "-ledequiv", "-lapequiv", "-lsan", "-lsnd", "-lstExcpt", "-lStdLast", "-lStdUniv", "-lstEnder", "-lstretch", "-lthined"
+         } else if (targetPlatform.operatingSystem.linux) {
 -          linker.args "-L${gsLibraryPath}", "-lc", "-lm", "-lgeo", "-ledequiv", "-lapequiv", "-lsan", "-lsnd", "-lstExcpt", "-lStdLast", "-lStdUniv", "-lstEnder", "-lstretch", "-lthined"
 +          linker.args "-Wl,--no-as-needed", "-L${gsLibraryPath}", "-lc", "-lgeo", "-lm", "-ledequiv", "-lapequiv", "-lsan", "-lsnd", "-lstExcpt", "-lStdLast", "-lStdUniv", "-lstEnder", "-lstretch", "-lthined"
          }

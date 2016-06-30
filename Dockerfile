@@ -29,7 +29,7 @@ COPY geoclient-build.patch .
 
 RUN git clone https://github.com/CityOfNewYork/geoclient.git \
     && ( cd geoclient \
-         && git checkout dev \
+         && git checkout master \
          && patch -p1 < /app/geoclient-build.patch \
          && ./gradlew build -x test )
 
