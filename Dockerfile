@@ -41,7 +41,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y unzip wget git openjdk-7-jd
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.m2 root/.gradle
 
 # Setup Tomcat to link to our native library
-ENV CATALINA_OPTS=-Djava.library.path=$LD_LIBRARY_PATH:/app/geoclient/build/libs/
+ENV CATALINA_OPTS=-Djava.library.path=/usr/lib/jni/:$LD_LIBRARY_PATH:/app/geoclient/build/libs/
 
 # Replace default Tomcat web application with Geoclient
 RUN rm -rf $CATALINA_HOME/webapps/ROOT
